@@ -98,11 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
     'Thiago Jardim de Castro',
     '',
     '$ cat formacao.txt',
-    'ADS — UNINTER (cursando)',
+    'Engenharia de Software — UNINTER (cursando)',
     '',
     '$ cat stack.txt',
-    'HTML · CSS · JavaScript · Supabase',
-    'Google Apps Script · Vercel · GitHub'
+    'HTML · CSS · JavaScript · GitHub'
   ];
 
   var prefereMenosMovimento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
