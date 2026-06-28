@@ -1,0 +1,703 @@
+/* ============================================================
+   PORTFÓLIO ACADÊMICO — style.css
+   CSS3 puro, sem frameworks. Organizado em:
+   1. Tokens de design (variáveis CSS / temas claro e escuro)
+   2. Reset básico
+   3. Utilitários (container, eyebrow, botões)
+   4. Cabeçalho e navegação (incluindo menu mobile)
+   5. Seção Hero / terminal
+   6. Seções gerais (Sobre, Formação, Portfólio, Contato)
+   7. Formulário
+   8. Rodapé
+   9. Responsividade e acessibilidade (reduced motion, foco)
+============================================================ */
+
+/* ---------- 1. TOKENS DE DESIGN ---------- */
+/* Variáveis do TEMA CLARO (valores padrão, aplicados no :root) */
+:root {
+  --color-bg: #f7f8f4;          /* fundo geral da página, papel levemente frio */
+  --color-surface: #ffffff;     /* fundo de cartões e blocos elevados */
+  --color-surface-alt: #eef0e9; /* fundo alternado entre seções */
+  --color-text: #1b1f17;        /* texto principal */
+  --color-text-muted: #5b6358;  /* texto secundário/legendas */
+  --color-border: #d8dcd1;      /* linhas e bordas sutis */
+  --color-accent: #0f6b5c;      /* verde-terminal: cor de destaque principal */
+  --color-accent-soft: rgba(15, 107, 92, 0.12);
+  --color-accent-2: #c97a1a;    /* âmbar: destaque secundário, usado com moderação */
+  --color-danger: #b3261e;      /* mensagens de erro do formulário */
+  --color-success: #1f7a4d;
+
+  /* Tipografia: pilhas de fontes do sistema, sem dependências externas */
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  --header-height: 76px;
+  --radius: 10px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --transition: 0.2s ease;
+}
+
+/* Variáveis do TEMA ESCURO. O atributo data-theme="dark" é alternado
+   pelo script.js no elemento <html>. Como usamos variáveis CSS,
+   basta sobrescrevê-las aqui — nenhuma outra regra precisa mudar. */
+[data-theme="dark"] {
+  --color-bg: #11140f;
+  --color-surface: #181c14;
+  --color-surface-alt: #1f241a;
+  --color-text: #eceee6;
+  --color-text-muted: #a7ae9c;
+  --color-border: #303526;
+  --color-accent: #2bbfa0;
+  --color-accent-soft: rgba(43, 191, 160, 0.16);
+  --color-accent-2: #f2a93b;
+  --color-danger: #ff6b6b;
+  --color-success: #4ade80;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- 2. RESET BÁSICO ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* rolagem suave ao clicar nos links do menu */
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  /* Transição suave ao alternar entre tema claro e escuro */
+  transition: background-color var(--transition), color var(--transition);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Todas as seções recebem este deslocamento para que o cabeçalho fixo
+   não cubra o título ao navegar por âncoras (#sobre, #formacao, etc.) */
+section {
+  scroll-margin-top: var(--header-height);
+}
+
+/* ---------- 3. UTILITÁRIOS ---------- */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 0.75em;
+}
+
+.section__title {
+  font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.2rem);
+  margin-bottom: 1.2em;
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+/* Botões: variante preenchida (primary) e variante contornada (ghost) */
+.button {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.85em 1.6em;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: transform var(--transition), background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.button--primary {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+.button--primary:hover {
+  transform: translateY(-2px);
+}
+
+.button--ghost {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.button--ghost:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ---------- 4. CABEÇALHO E NAVEGAÇÃO ---------- */
+.header {
+  position: fixed; /* fixa o cabeçalho no topo durante a rolagem */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 1000;
+}
+
+.header__inner {
+  max-width: 1100px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.nav__list {
+  display: flex;
+  gap: 28px;
+}
+
+.nav__link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  padding: 4px 2px;
+}
+
+/* Sublinhado animado ao passar o mouse, reforçando a identidade "código" */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width var(--transition);
+}
+
+.nav__link:hover::after {
+  width: 100%;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+}
+
+/* Botão hambúrguer: escondido por padrão, aparece só em telas pequenas (media query) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+}
+
+.menu-toggle__bar {
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-text);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Estado "menu aberto": transforma o ícone de hambúrguer em "X".
+   Esta classe é adicionada/removida pelo script.js */
+.menu-toggle.is-active .menu-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.is-active .menu-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.is-active .menu-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- 5. HERO / TERMINAL ---------- */
+.hero {
+  padding: calc(var(--header-height) + 56px) 0 80px;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero__title {
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+}
+
+.hero__subtitle {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  max-width: 480px;
+}
+
+.hero__cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 1.6em;
+  flex-wrap: wrap;
+}
+
+/* Janela de terminal: o elemento de assinatura visual da página */
+.terminal {
+  background-color: #14171f;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+.terminal__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background-color: #1d2029;
+}
+
+.terminal__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.terminal__dot--red { background-color: #ff5f56; }
+.terminal__dot--yellow { background-color: #ffbd2e; }
+.terminal__dot--green { background-color: #27c93f; }
+
+.terminal__title {
+  margin-left: 6px;
+  font-size: 0.8rem;
+  color: #8b8fa3;
+}
+
+.terminal__body {
+  padding: 22px 20px;
+  min-height: 180px;
+  color: #d7f7ec;
+  font-size: 0.92rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Cursor que pisca ao final do texto digitado pelo JS */
+.terminal__cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background-color: #2bbfa0;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+/* ---------- 6. SEÇÕES GERAIS ---------- */
+.section {
+  padding: 80px 0;
+}
+
+.section--alt {
+  background-color: var(--color-surface-alt);
+}
+
+/* Sobre mim */
+.about__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 48px;
+}
+
+.about__hobbies-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.8em;
+}
+
+.hobby-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.hobby-list li:last-child {
+  border-bottom: none;
+}
+
+/* Formação: linha do tempo vertical */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+
+.timeline__item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 20px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.timeline__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.timeline__index {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.timeline__content h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.3em;
+}
+
+.timeline__meta {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.6em;
+}
+
+/* Idiomas */
+.languages__title {
+  font-size: 1.1rem;
+  margin-bottom: 0.8em;
+}
+
+.languages__grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.language-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.language-card__name {
+  font-weight: 600;
+}
+
+.language-card__level {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-accent);
+}
+
+/* Portfólio: grade flexível com CSS Grid puro */
+.portfolio__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.project-card__index {
+  font-family: var(--font-mono);
+  color: var(--color-accent-2);
+  font-size: 0.85rem;
+  margin-bottom: 0.8em;
+}
+
+.project-card__title {
+  font-size: 1.15rem;
+  margin-bottom: 0.4em;
+}
+
+.project-card__desc {
+  color: var(--color-text-muted);
+  flex-grow: 1;
+}
+
+.project-card__link {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-top: 1em;
+}
+
+.project-card__link:hover {
+  text-decoration: underline;
+}
+
+/* Contato: layout em duas colunas (informações + formulário) */
+.contato__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+}
+
+.contact-list li {
+  padding: 8px 0;
+}
+
+/* ---------- 7. FORMULÁRIO ---------- */
+.form {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+
+.form__field {
+  margin-bottom: 20px;
+}
+
+.form__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.form__input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color var(--transition);
+}
+
+.form__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Estado de erro: aplicado via JS quando a validação falha */
+.form__input.is-invalid {
+  border-color: var(--color-danger);
+}
+
+.form__error {
+  display: block;
+  min-height: 1.2em;
+  font-size: 0.82rem;
+  color: var(--color-danger);
+  margin-top: 6px;
+}
+
+.form__submit {
+  width: 100%;
+  border: none;
+}
+
+/* ---------- 8. RODAPÉ ---------- */
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding: 28px 0;
+}
+
+.footer__inner {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+/* ---------- 9. RESPONSIVIDADE ---------- */
+@media (max-width: 880px) {
+  .hero__grid,
+  .about__grid,
+  .contato__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  /* Menu de navegação some e é substituído pelo botão hambúrguer */
+  .nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    transform: translateY(-110%);
+    transition: transform var(--transition);
+    z-index: 999;
+  }
+
+  /* Classe adicionada pelo script.js para revelar o menu mobile */
+  .nav.is-open {
+    transform: translateY(0);
+  }
+
+  .nav__list {
+    flex-direction: column;
+    padding: 24px;
+    gap: 18px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .portfolio__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline__item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: calc(var(--header-height) + 32px);
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .form {
+    padding: 22px;
+  }
+}
+
+/* Respeita a preferência do usuário por menos animações */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Estilo de foco visível para navegação via teclado (acessibilidade) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

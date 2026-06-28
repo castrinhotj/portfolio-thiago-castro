@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiago Jardim de Castro — Portfólio Acadêmico</title>
+  <meta name="description" content="Portfólio acadêmico de Thiago Jardim de Castro: formação, projetos e contato.">
+
+  <!-- Folha de estilos própria, sem frameworks externos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       CABEÇALHO FIXO COM NAVEGAÇÃO
+       Fica colado no topo da tela durante a rolagem (position: fixed
+       no CSS). Contém a logo, o menu de âncoras, o botão de tema
+       claro/escuro e o botão de menu mobile (hambúrguer).
+  ============================================================ -->
+  <header class="header" id="header">
+    <div class="header__inner">
+
+      <a href="#hero" class="logo" aria-label="Voltar ao topo da página">{ portfólio }</a>
+
+      <!-- Menu de navegação. O atributo id é usado pelo JS para
+           abrir/fechar o menu em telas pequenas. -->
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li><a href="#sobre" class="nav__link">Sobre mim</a></li>
+          <li><a href="#formacao" class="nav__link">Formação</a></li>
+          <li><a href="#portfolio" class="nav__link">Portfólio</a></li>
+          <li><a href="#contato" class="nav__link">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <!-- Botão de alternância de tema. O ícone é trocado pelo JS. -->
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar entre tema claro e escuro">
+          <span class="theme-toggle__icon" id="theme-icon" aria-hidden="true">🌙</span>
+        </button>
+
+        <!-- Botão hambúrguer: só aparece em telas pequenas (ver style.css) -->
+        <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         SEÇÃO HERO — Apresentação inicial em formato "terminal"
+         para reforçar a identidade de estudante/desenvolvedor.
+    ============================================================ -->
+    <section class="hero" id="hero">
+      <div class="container hero__grid">
+
+        <div class="hero__text">
+          <p class="eyebrow">// portfólio acadêmico</p>
+          <h1 class="hero__title">Olá, eu sou <span class="accent">Thiago Castro</span></h1>
+          <p class="hero__subtitle">Policial Militar apaixonado por tecnologia, desenvolvedor de sistemas que facilitam o trabalho operacional da PMMG e estudante de Análise e Desenvolvimento de Sistemas.</p>
+
+          <div class="hero__cta">
+            <a href="#portfolio" class="button button--primary">Ver portfólio</a>
+            <a href="#contato" class="button button--ghost">Falar comigo</a>
+          </div>
+        </div>
+
+        <!-- Bloco decorativo estilo "janela de terminal". O texto digitado
+             é inserido pelo script.js (efeito de máquina de escrever). -->
+        <div class="terminal" aria-hidden="true">
+          <div class="terminal__bar">
+            <span class="terminal__dot terminal__dot--red"></span>
+            <span class="terminal__dot terminal__dot--yellow"></span>
+            <span class="terminal__dot terminal__dot--green"></span>
+            <span class="terminal__title">apresentacao.sh</span>
+          </div>
+          <div class="terminal__body" id="terminal-body">
+            <!-- Conteúdo preenchido dinamicamente pelo script.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SOBRE MIM
+    ============================================================ -->
+    <section class="section" id="sobre">
+      <div class="container">
+        <p class="eyebrow">sobre mim</p>
+        <h2 class="section__title">Quem eu sou</h2>
+
+        <div class="about__grid">
+          <div class="about__text">
+            <p>Sou Thiago Jardim de Castro, Policial Militar de Minas Gerais lotado na 3ª Companhia de Polícia Militar de Meio Ambiente (3ª CIA PM MAmb). Sou apaixonado por tecnologia e, ao longo da minha carreira, percebi que o conhecimento em desenvolvimento de sistemas poderia ir muito além de um hobby — poderia transformar a rotina de trabalho.</p>
+            <p>As ferramentas que desenvolvo têm como finalidade facilitar o meu próprio trabalho e o dos meus colegas, tornando processos operacionais mais ágeis e organizados. Essa busca por soluções práticas me levou a formalizar meus estudos em Análise e Desenvolvimento de Sistemas, unindo a experiência de campo com o desenvolvimento de software.</p>
+          </div>
+
+          <div class="about__hobbies">
+            <h3 class="about__hobbies-title">Hobbies e interesses</h3>
+            <!-- Lista de hobbies e interesses pessoais -->
+            <ul class="hobby-list">
+              <li>Desenvolvimento de sistemas</li>
+              <li>Futebol</li>
+              <li>Jiu-Jitsu</li>
+              <li>Direito e legislação ambiental</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FORMAÇÃO — cursos, certificações e idiomas
+    ============================================================ -->
+    <section class="section section--alt" id="formacao">
+      <div class="container">
+        <p class="eyebrow">formação</p>
+        <h2 class="section__title">Trajetória acadêmica</h2>
+
+        <!-- Linha do tempo em ordem cronológica decrescente (mais recente primeiro),
+             cobrindo toda a trajetória acadêmica do autor. -->
+        <ol class="timeline">
+
+          <li class="timeline__item">
+            <span class="timeline__index">01</span>
+            <div class="timeline__content">
+              <h3>Graduação em Engenharia de Software <em>(em andamento)</em></h3>
+              <p class="timeline__meta">UNINTER — Centro Universitário Internacional · 2025–atual</p>
+              <p>Curso superior com foco em desenvolvimento de software, engenharia de sistemas, banco de dados e programação web. Conhecimentos aplicados diretamente no desenvolvimento de sistemas operacionais para a PMMG.</p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <span class="timeline__index">02</span>
+            <div class="timeline__content">
+              <h3>Especialização em Direito Militar</h3>
+              <p class="timeline__meta">Instituto Prominas Serviços Educacionais (PROMINAS) · 2020–2022 · 640h</p>
+              <p>Especialização voltada ao ordenamento jurídico aplicado às instituições militares, abrangendo legislação, disciplina e hierarquia nas Polícias Militares e Forças Armadas.</p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <span class="timeline__index">03</span>
+            <div class="timeline__content">
+              <h3>Aperfeiçoamento em Organização Judiciária Militar</h3>
+              <p class="timeline__meta">Instituto Prominas Serviços Educacionais (PROMINAS) · 2022 · 180h</p>
+              <p>Curso de aperfeiçoamento com foco na estrutura e funcionamento da Justiça Militar, aplicado ao contexto da carreira policial militar.</p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <span class="timeline__index">04</span>
+            <div class="timeline__content">
+              <h3>Aperfeiçoamento em Direitos Constitucionais e Direitos Fundamentais</h3>
+              <p class="timeline__meta">Faculdade Única de Ipatinga (FUNIP) · 2017–2019</p>
+              <p>Aprofundamento nos princípios e garantias constitucionais, com ênfase nos direitos fundamentais e sua aplicação prática no exercício da função pública.</p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <span class="timeline__index">05</span>
+            <div class="timeline__content">
+              <h3>Especialização em Direito Penal e Processual Penal</h3>
+              <p class="timeline__meta">Instituto Universitário Cândido Mendes (IUCAM/RJ) · 2016–2018 · 495h</p>
+              <p>Especialização nas normas e institutos do Direito Penal e do Processo Penal. Trabalho de conclusão: <em>Violência Doméstica Sob a Ótica da Lei Maria da Penha</em>.</p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <span class="timeline__index">06</span>
+            <div class="timeline__content">
+              <h3>Graduação em Direito</h3>
+              <p class="timeline__meta">Instituto Doctum (DOCTUM) · 2005–2010</p>
+              <p>Formação jurídica com ênfase em Direito Público, Penal e Ambiental. Trabalho de conclusão: <em>Responsabilidade Civil no Dano Ambiental</em>. Orientadora: Helen Karina A. Campos.</p>
+            </div>
+          </li>
+
+        </ol>
+
+        <div class="languages">
+          <h3 class="languages__title">Idiomas</h3>
+          <div class="languages__grid">
+            <!-- Adicione outros idiomas caso os possua -->
+            <div class="language-card">
+              <span class="language-card__name">Português</span>
+              <span class="language-card__level">Nativo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PORTFÓLIO — grade com 3 trabalhos realizados.
+         Os projetos abaixo são sistemas desenvolvidos para uso interno
+         da PMMG; o código-fonte está disponível no GitHub.
+    ============================================================ -->
+    <section class="section" id="portfolio">
+      <div class="container">
+        <p class="eyebrow">portfólio</p>
+        <h2 class="section__title">Trabalhos realizados</h2>
+
+        <!-- Grade construída com CSS Grid puro (ver .portfolio__grid em style.css) -->
+        <div class="portfolio__grid">
+
+          <article class="project-card">
+            <div class="project-card__index">01</div>
+            <h3 class="project-card__title">Painel Operacional — PMMG</h3>
+            <p class="project-card__desc">Sistema web para registro e acompanhamento de operações policiais militares ambientais. Conta com mapa interativo, consulta de coordenadas geográficas, auditoria de atividades e geração de relatórios. Desenvolvido com HTML, CSS, JavaScript e Supabase.</p>
+            <a href="https://github.com/castrinhotj" class="project-card__link" target="_blank" rel="noopener noreferrer">Ver no GitHub →</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__index">02</div>
+            <h3 class="project-card__title">Análise Criminal — PMMG</h3>
+            <p class="project-card__desc">Painel de inteligência para análise de dados criminais, com visualização de ocorrências em mapa, indicadores GDO, correlação entre operações e crimes, e exportação de relatórios em PDF. Integrado ao Supabase com controle de acesso por perfil.</p>
+            <a href="https://github.com/castrinhotj" class="project-card__link" target="_blank" rel="noopener noreferrer">Ver no GitHub →</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__index">03</div>
+            <h3 class="project-card__title">Castro Finanças</h3>
+            <p class="project-card__desc">Aplicação web de finanças pessoais desenvolvida como projeto paralelo. Construída com Next.js e Supabase, conta com inteligência artificial, leitor de QR Code em tempo real e navegação mobile responsiva.</p>
+            <a href="https://github.com/castrinhotj" class="project-card__link" target="_blank" rel="noopener noreferrer">Ver no GitHub →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTATO — informações + formulário validado via JS
+    ============================================================ -->
+    <section class="section section--alt" id="contato">
+      <div class="container contato__grid">
+
+        <div class="contato__info">
+          <p class="eyebrow">contato</p>
+          <h2 class="section__title">Vamos conversar</h2>
+          <p>Estou aberto a troca de experiências e conexões na área de tecnologia e desenvolvimento de sistemas. Envie uma mensagem!</p>
+
+          <ul class="contact-list">
+            <li><strong>E-mail:</strong> castrinhotj@gmail.com</li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/castrinhotj" target="_blank" rel="noopener noreferrer">github.com/castrinhotj</a></li>
+          </ul>
+        </div>
+
+        <!-- O atributo novalidate desliga a validação automática do navegador
+             para que toda a validação seja controlada pelo nosso script.js -->
+        <form class="form" id="contact-form" novalidate>
+
+          <div class="form__field">
+            <label for="nome" class="form__label">Nome</label>
+            <input type="text" id="nome" name="nome" class="form__input" placeholder="Seu nome completo">
+            <span class="form__error" id="erro-nome"></span>
+          </div>
+
+          <div class="form__field">
+            <label for="email" class="form__label">E-mail</label>
+            <input type="email" id="email" name="email" class="form__input" placeholder="seuemail@exemplo.com">
+            <span class="form__error" id="erro-email"></span>
+          </div>
+
+          <div class="form__field">
+            <label for="mensagem" class="form__label">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" class="form__input form__textarea" rows="5" placeholder="Escreva sua mensagem..."></textarea>
+            <span class="form__error" id="erro-mensagem"></span>
+          </div>
+
+          <button type="submit" class="button button--primary form__submit">Enviar mensagem</button>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       RODAPÉ
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>&copy; <span id="ano-atual"></span> Thiago Jardim de Castro. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script próprio, carregado no fim do body para não bloquear a renderização -->
+  <script src="script.js"></script>
+</body>
+</html>
